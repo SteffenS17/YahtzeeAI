@@ -24,33 +24,45 @@ class YhatzeeTransitionMatrix:
         return comb*perm_num/perm_denom
     
     @staticmethod
-    def get_top():    
+    def get_top():
         return np.array([
-        [(np.power(6,5) - YhatzeeTransitionMatrix.prob(5,2,6) - YhatzeeTransitionMatrix.prob(5,3,6) - YhatzeeTransitionMatrix.prob(5,4,6) - YhatzeeTransitionMatrix.prob(5,5,6))/np.power(6,5), 
-         YhatzeeTransitionMatrix.prob(5,2,6)/np.power(6,5), 
-         YhatzeeTransitionMatrix.prob(5,3,6)/np.power(6,5),
-         YhatzeeTransitionMatrix.prob(5,4,6)/np.power(6,5), 
-         YhatzeeTransitionMatrix.prob(5,5,6)/np.power(6,5)],
+        [(np.power(6,5) -  YhatzeeTransitionMatrix.prob(5,1,6) - YhatzeeTransitionMatrix.prob(5,2,6) - YhatzeeTransitionMatrix.prob(5,3,6) - YhatzeeTransitionMatrix.prob(5,4,6) - YhatzeeTransitionMatrix.prob(5,5,6)), 
+         YhatzeeTransitionMatrix.prob(5,1,6), 
+         YhatzeeTransitionMatrix.prob(5,2,6), 
+         YhatzeeTransitionMatrix.prob(5,3,6),
+         YhatzeeTransitionMatrix.prob(5,4,6), 
+         YhatzeeTransitionMatrix.prob(5,5,6)],
+
+         [0, 
+          YhatzeeTransitionMatrix.prob(4,0,6),
+          YhatzeeTransitionMatrix.prob(4,1,6),
+          YhatzeeTransitionMatrix.prob(4,2,6),
+          YhatzeeTransitionMatrix.prob(4,3,6),
+          YhatzeeTransitionMatrix.prob(4,4,6),
+          ],
 
         [0, 
-         (YhatzeeTransitionMatrix.prob(3,0,6) - 5)/np.power(6,3) ,
-         (YhatzeeTransitionMatrix.prob(3,1,6) + 5)/np.power(6,3) ,
-         YhatzeeTransitionMatrix.prob(3,2,6)/np.power(6,3), 
-         YhatzeeTransitionMatrix.prob(3,3,6)/np.power(6,3)],
+         0,
+         (YhatzeeTransitionMatrix.prob(3,0,6) - 5),
+         (YhatzeeTransitionMatrix.prob(3,1,6) + 5),
+         YhatzeeTransitionMatrix.prob(3,2,6), 
+         YhatzeeTransitionMatrix.prob(3,3,6)],
 
         [0, 
          0, 
-         (np.power(6,2) - YhatzeeTransitionMatrix.prob(2,1,6) - YhatzeeTransitionMatrix.prob(2,2,6))/np.power(6,2) ,
-         YhatzeeTransitionMatrix.prob(2,1,6)/np.power(6,2), 
-         YhatzeeTransitionMatrix.prob(2,2,6)/np.power(6,2)],
+         0,
+         (np.power(6,2) - YhatzeeTransitionMatrix.prob(2,1,6) - YhatzeeTransitionMatrix.prob(2,2,6)),
+         YhatzeeTransitionMatrix.prob(2,1,6), 
+         YhatzeeTransitionMatrix.prob(2,2,6)],
 
         [0, 
          0, 
+         0,
          0, 
-         (np.power(6,1)- YhatzeeTransitionMatrix.prob(1,1,6))/np.power(6,1),
-         YhatzeeTransitionMatrix.prob(1,1,6)/np.power(6,1)],
+         (np.power(6,1)- YhatzeeTransitionMatrix.prob(1,1,6)),
+         YhatzeeTransitionMatrix.prob(1,1,6)],
 
-        [0,0,0,0,1]
+        [0,0,0,0,0,1]
         ])
         
     @staticmethod
@@ -200,9 +212,9 @@ class YhatzeeProbabilities():
     @staticmethod
     def get_top_state(n_throws, dice_values, dice_number):
         if n_throws == 0:
-            return np.array([1,0,0,0,0])
+            return np.array([1,0,0,0,0,0])
         
-        state = np.array([0,0,0,0,0])
+        state = np.array([0,0,0,0,0,0])
         count = dice_values.count(dice_number)
         
         if count <= 1:
@@ -456,7 +468,7 @@ class YhatzeeProbabilities():
 
 if __name__ == "__main__":
     # Example for calculating probabilities for all categories
-    n_throws = 1
+    n_throws = 0
     dices = np.array([
         [1, 2, 3, 4, 5],
         [1, 1, 1, 1, 1],
