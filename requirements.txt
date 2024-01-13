@@ -1,0 +1,9 @@
+gym
+matplotlib
+memory_profiler
+numpy
+optuna
+pygame
+scipy
+torch
+tqdm
