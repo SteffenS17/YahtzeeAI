@@ -24,7 +24,7 @@ class YhatzeeTransitionMatrix:
         return comb*perm_num/perm_denom
     
     @staticmethod
-    def get_top():
+    def get_top_distribution():
         return np.array([
         [(np.power(6,5) -  YhatzeeTransitionMatrix.prob(5,1,6) - YhatzeeTransitionMatrix.prob(5,2,6) - YhatzeeTransitionMatrix.prob(5,3,6) - YhatzeeTransitionMatrix.prob(5,4,6) - YhatzeeTransitionMatrix.prob(5,5,6)), 
          YhatzeeTransitionMatrix.prob(5,1,6), 
@@ -64,6 +64,11 @@ class YhatzeeTransitionMatrix:
 
         [0,0,0,0,0,1]
         ])
+    
+    @staticmethod
+    def get_top():
+        dist = YhatzeeTransitionMatrix.get_top_distribution()
+        return dist / np.sum(dist, axis=1, keepdims=True)
         
     @staticmethod
     def get_threes():
